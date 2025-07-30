@@ -83,16 +83,13 @@ Follow these steps to get the entire application running on your local machine.
   Create a `.env` file in the `backend` directory and add your credentials.
 
   ```env
-  # Server Port
   PORT=8080
-
-  # JWT Secret Key
+  
   JWT_SECRET=your_strong_jwt_secret_key_here
-
-  # MySQL Database Configuration
-  DB_HOST=localhost
-  DB_USER=your_mysql_username
-  DB_PASSWORD=your_mysql_password
+  
+  DB_HOST=mysql
+  DB_USER=root
+  DB_PASSWORD=Sudarshan@18
   DB_NAME=inventory_db
   ```
 
