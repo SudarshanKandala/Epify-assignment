@@ -3,7 +3,7 @@ require('dotenv').config();
 const mysql = require("mysql2/promise");
 
 const dbPool = mysql.createPool({
-  host: process.env.DB_HOST,
+  host: process.env.DB_HOST || "localhost", 
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
@@ -13,13 +13,17 @@ const dbPool = mysql.createPool({
 });
 
 const testDbConnection = async () => {
-  try {
-    const connection = await dbPool.getConnection();
-    console.log("MySQL connected successfully");
-    connection.release();
-  } catch (error) {
-    console.error("MySQL connection failed:", error.message);
-    process.exit(1);
+  let connected = false;
+  while (!connected) {
+    try {
+      const connection = await dbPool.getConnection();
+      console.log(`✅ MySQL connected successfully at ${process.env.DB_HOST || "localhost"}`);
+      connection.release();
+      connected = true;
+    } catch (error) {
+      console.error(`⏳ MySQL not ready yet at ${process.env.DB_HOST || "localhost"}. Retrying in 3s...`);
+      await new Promise((res) => setTimeout(res, 3000));
+    }
   }
 };
 

@@ -22,7 +22,7 @@ exports.handleLogin = async (request, response) => {
 
     response.json({ access_token: jwtToken });
   } catch (error) {
-    response.status(500).json({ message: "Server error", error: error.message });
+    response.status(500).json({ message: "Server error", error: error.message }); 
   }
 };
 

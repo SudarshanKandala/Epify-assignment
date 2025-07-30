@@ -19,3 +19,6 @@ expressApp.use("/", require("./routes/authRoutes.js"));
 expressApp.use("/", require("./routes/productRoutes.js"));
 
 module.exports = expressApp;
+expressApp.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
+});
